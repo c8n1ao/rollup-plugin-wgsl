@@ -1,16 +1,36 @@
 {
   "name": "rollup-plugin-wgsl",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.5",
   "description": "A Rollup tool for exporting ES modules of WGSL code",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/types/index.d.ts",
   "license": "MIT",
+  "keywords": [
+    "wgsl"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup -c rollup.config.js --bundleConfigAsCjs"
   },
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist/*.js",
+    "dist/types/*.d.ts"
+  ],
   "author": "",
   "devDependencies": {
-    "fs-extra": "^11.1.1",
-    "rollup": "^3.21.4"
+    "@rollup/plugin-commonjs": "^24.1.0",
+    "@rollup/plugin-node-resolve": "^15.0.2",
+    "@rollup/plugin-typescript": "^11.1.0",
+    "@types/node": "^18.16.3",
+    "rollup": "^3.21.4",
+    "tslib": "^2.5.0",
+    "typescript": "^5.0.4"
   }
 }
