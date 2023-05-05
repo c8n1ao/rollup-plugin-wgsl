@@ -6,14 +6,17 @@ interface Options {
   fileTypes: FileTypes[]
 }
 
-export default function wgsl(options: Options) {
-  options = { ...{ fileTypes: ['frag', 'vert', 'wgsl', 'glsl'] }, ...options }
+export default function wgsl(options?: Options) {
+  options = {
+    ...{ fileTypes: ['frag', 'vert', 'wgsl', 'glsl'] },
+    ...options,
+  } as Options
 
   return {
     name: 'wgsl',
 
     async load(id: string) {
-      const isTargetSuffix = options.fileTypes.some((type) =>
+      const isTargetSuffix = options!.fileTypes.some((type) =>
         id.endsWith(`.${type}`)
       )
 
