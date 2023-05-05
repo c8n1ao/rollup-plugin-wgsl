@@ -9,6 +9,11 @@
   "keywords": [
     "wgsl"
   ],
+  "homepage": "https://github.com/c8n1ao/rollup-plugin-wgsl",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/c8n1ao/rollup-plugin-wgsl"
+  },
   "scripts": {
     "build": "rollup -c rollup.config.js --bundleConfigAsCjs"
   },
