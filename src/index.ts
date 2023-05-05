@@ -1,11 +1,23 @@
 import { readFile } from 'node:fs/promises'
 
-export default function wgsl() {
+type FileTypes = 'frag' | 'vert' | 'wgsl' | 'glsl'
+
+interface Options {
+  fileTypes: FileTypes[]
+}
+
+export default function wgsl(options: Options) {
+  options = { ...{ fileTypes: ['frag', 'vert', 'wgsl', 'glsl'] }, ...options }
+
   return {
     name: 'wgsl',
 
     async load(id: string) {
-      if (id.endsWith('.wgsl')) {
+      const isTargetSuffix = options.fileTypes.some((type) =>
+        id.endsWith(`.${type}`)
+      )
+
+      if (isTargetSuffix) {
         const code = await readFile(id, 'utf-8')
         return `export default ${JSON.stringify(code)};`
       }
