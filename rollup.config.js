@@ -2,6 +2,7 @@ import path from 'path'
 import typescript from '@rollup/plugin-typescript'
 import * as pluginNodeResolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
+import { terser } from 'rollup-plugin-terser'
 
 const resolve = (p) => path.resolve(__dirname, p)
 
@@ -24,5 +25,10 @@ export default {
     }),
     pluginNodeResolve.nodeResolve(),
     commonjs(),
+    terser({
+      output: {
+        comments: true,
+      },
+    }),
   ],
 }
